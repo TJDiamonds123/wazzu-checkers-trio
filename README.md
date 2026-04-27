@@ -1,2 +1,2 @@
 # wazzu-tower-defense
-description.
+pivoting to checkers since 1984
