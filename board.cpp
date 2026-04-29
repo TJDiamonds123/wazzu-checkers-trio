@@ -1,6 +1,4 @@
 #include "Board.hpp"
-#include "NormalPiece.hpp"
-#include "KingPiece.hpp"
 
 Board::Board(int s)
 {
