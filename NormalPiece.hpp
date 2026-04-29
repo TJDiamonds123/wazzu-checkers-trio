@@ -13,12 +13,16 @@ public:
     {
         sf::CircleShape piece(size / 2.5f);
 
-        piece.setPosition(sf::Vector2f(
-            (float)(x + 15),
-            (float)(y + 15)
-        ));
+        piece.setPosition(sf::Vector2f((float)(x + 15), (float)(y + 15)));
 
-        piece.setFillColor(red ? sf::Color::Red : sf::Color::Black);
+        if (red)
+        {
+            piece.setFillColor(sf::Color::Red);
+        }
+        else
+        {
+            piece.setFillColor(sf::Color::Black);
+        }
 
         window.draw(piece);
     }
