@@ -5,7 +5,7 @@
 int main() {
 
 
-	sf::RenderWindow window(sf::VideoMode(800, 800), " Checker Board");
+	sf::RenderWindow window(sf::VideoMode(sf::Vector2u(800, 800)), "Checkers Board");
 
 	int size = 100;
 
