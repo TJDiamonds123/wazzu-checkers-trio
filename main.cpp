@@ -1,41 +1,55 @@
 #include "Board.hpp"
 #include <SFML/Graphics.hpp>
 
-using namespace std;
-using namespace sf;
+int main()
+{
+    sf::RenderWindow window(sf::VideoMode(sf::Vector2u(800, 800)), "Checkers");
 
-int main() {
+    int size = 100;
+    Board board(size);
 
+    std::string winner = "\0";
 
-	sf::RenderWindow window(sf::VideoMode(sf::Vector2u(800, 800)), "Checkers Board");
+    while (window.isOpen())
+    {
+        while (auto event = window.pollEvent())
+        {
+            if (event->is<sf::Event::Closed>())
+            {
+                window.close();
+            }
 
-	int size = 100;
+            if (event->is<sf::Event::MouseButtonPressed>())
+            {
+                auto pos = sf::Mouse::getPosition(window);
 
+                int col = pos.x / size;
+                int row = pos.y / size;
 
-	Board board(size);
+                board.whenClick(row, col);
+            }
+        }
 
+        if (board.getBlack() == 0)
+        {
+            winner = "Red Wins!";
+        }
+        else if (board.getRed() == 0)
+        {
+            winner = "Black Wins!";
+        }
 
-	while (window.isOpen()) {
+        window.clear();
+        board.create(window);
 
-		while (auto event = window.pollEvent()) {
+        if (winner != "\0")
+        {
+            board.drawWinner(window, winner);
+        }
 
-			window.clear();
-			board.create(window);
-			window.display();
+        window.display();
+    }
 
-
-			if (event->is<sf::Event::Closed>()) {
-				window.close();
-			}
-
-		}
-
-
-
-
-
-	}
-
-
-	return 0;
+    return 0;
+;
 }
