@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
+#include "NormalPiece.hpp"
+#include "KingPiece.hpp"
 
 class Board
 {
