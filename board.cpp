@@ -10,7 +10,7 @@ Board::Board(int s) {
 void Board::create(sf::RenderWindow& window) {
 	for (int r = 0; r < 8; r++) {//this is for the rows
 		for (int c = 0; c < 8; c++) {
-			sf::RectangleShape square(sf::Vector2f(size, size));//create squares
+			sf::RectangleShape square(sf::Vector2f((float)size, (float)size));//create squares
 
 			square.setPosition(c * size, r * size);
 
