@@ -20,6 +20,7 @@ private:
 
 public:
     Board(int s);
+    bool canCaptureAgain(int r, int c);
 
     void init();
     void create(sf::RenderWindow& window);
