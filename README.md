@@ -14,7 +14,7 @@ This is a simple Checkers game built in c++ using "SFML" libraries. We tried to 
 
 ## Controls
 
-* Click a piece to select it, then click a valid tile to move
+* Click a piece to select it, then click a valid square to move. On the menu screen are green and red rectangles. Press the red button to quit and the green button to start the game.
 
 ## Setup Instructions
 
