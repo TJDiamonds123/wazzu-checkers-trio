@@ -22,6 +22,9 @@ This is a simple Checkers game built in C++ using "SFML" libraries. We tried to 
 2. Configure SFML in Visual Studio
 3. Build and run the project
 
+## Polymorphism
+
+* Polymorphism is used from a derived Piece.hpp class into KingPiece.hpp and NormalPiece.hpp separately.
 
 ## Authors
 
