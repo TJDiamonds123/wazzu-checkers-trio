@@ -37,6 +37,48 @@ void Board::init()
     }
 }
 
+bool Board::canCaptureAgain(int r, int c) {
+    int piece = grid[r][c];
+
+    // up left
+    if (r - 2 >= 0 && c - 2 >= 0)
+    {
+        if (grid[r - 1][c - 1] != 0 && grid[r - 2][c - 2] == 0)
+        {
+            return true;
+        }
+    }
+
+    // up right
+    if (r - 2 >= 0 && c + 2 < 8)
+    {
+        if (grid[r - 1][c + 1] != 0 && grid[r - 2][c + 2] == 0)
+        {
+            return true;
+        }
+    }
+
+    // down left
+    if (r + 2 < 8 && c - 2 >= 0)
+    {
+        if (grid[r + 1][c - 1] != 0 && grid[r + 2][c - 2] == 0)
+        {
+            return true;
+        }
+    }
+
+    // down right
+    if (r + 2 < 8 && c + 2 < 8)
+    {
+        if (grid[r + 1][c + 1] != 0 && grid[r + 2][c + 2] == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void Board::whenClick(int row, int col)
 {
     if (!hasSelection)
@@ -68,7 +110,7 @@ void Board::whenClick(int row, int col)
         {
             if (isKing)
             {
-                validMove = true; // kings move both directions
+                validMove = true;
             }
             else
             {
@@ -122,6 +164,11 @@ void Board::whenClick(int row, int col)
 
         if (validMove)
         {
+
+            bool didCapture = false;
+            if (abs(dr) == 2) {
+                didCapture = true;
+            }
             this->grid[row][col] = piece;
             this->grid[this->selectedRow][this->selectedCol] = 0;
 
@@ -136,7 +183,17 @@ void Board::whenClick(int row, int col)
                 this->grid[row][col] = 4;
             }
 
-            this->redTurn = !this->redTurn;
+            if (didCapture == true && canCaptureAgain(row, col) == true) {
+                this->selectedRow = row;
+                this->selectedCol = col;
+                this->hasSelection = true;
+            }
+            else {
+                this->redTurn = !this->redTurn;
+                this->hasSelection = false;
+            }
+
+
         }
     }
 
