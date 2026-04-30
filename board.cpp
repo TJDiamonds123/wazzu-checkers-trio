@@ -1,6 +1,7 @@
 #include "Board.hpp"
+#include <iostream>
 
-Board::Board(int s)
+Board::Board(int s) : attackSound(attackBuffer) // Used ChatGPT to help configure the audio
 {
     this->size = s;
     this->redHealth = 12;
@@ -12,6 +13,14 @@ Board::Board(int s)
     this->selectedCol = -1;
 
     init();
+
+    // Load Sound
+    if (!attackBuffer.loadFromFile("Vine boom sound effect - Business Goose (128k).wav"))
+    {
+        std::cout << "Failed to load attack.wav" << std::endl;
+    }
+
+    attackSound.setBuffer(attackBuffer);
 }
 
 void Board::init()
@@ -25,21 +34,16 @@ void Board::init()
             if ((r + c) % 2 == 1)
             {
                 if (r < 3)
-                {
                     grid[r][c] = 2;
-                }
                 else if (r > 4)
-                {
                     grid[r][c] = 1;
-                }
             }
         }
     }
 }
 
-bool Board::canCaptureAgain(int r, int c) {
-    int piece = grid[r][c];
-
+bool Board::canCaptureAgain(int r, int c)
+{
     // up left
     if (r - 2 >= 0 && c - 2 >= 0)
     {
@@ -85,11 +89,14 @@ void Board::whenClick(int row, int col)
     {
         if (grid[row][col] != 0)
         {
-            if ((redTurn && grid[row][col] == 1) || (!redTurn && grid[row][col] == 2) || grid[row][col] == 3 || grid[row][col] == 4)
+            if ((redTurn && grid[row][col] == 1) ||
+                (!redTurn && grid[row][col] == 2) ||
+                grid[row][col] == 3 ||
+                grid[row][col] == 4)
             {
-                this->selectedRow = row;
-                this->selectedCol = col;
-                this->hasSelection = true;
+                selectedRow = row;
+                selectedCol = col;
+                hasSelection = true;
             }
         }
         return;
@@ -104,24 +111,17 @@ void Board::whenClick(int row, int col)
     if (grid[row][col] == 0)
     {
         bool validMove = false;
+        bool didCapture = false;
 
         // Normal move
         if (abs(dr) == 1 && abs(dc) == 1)
         {
             if (isKing)
-            {
                 validMove = true;
-            }
             else
             {
-                if (piece == 1 && dr == -1)
-                {
-                    validMove = true;
-                }
-                if (piece == 2 && dr == 1)
-                {
-                    validMove = true;
-                }
+                if (piece == 1 && dr == -1) validMove = true;
+                if (piece == 2 && dr == 1) validMove = true;
             }
         }
 
@@ -133,71 +133,56 @@ void Board::whenClick(int row, int col)
 
             if (grid[midRow][midCol] != 0 && grid[midRow][midCol] != piece)
             {
+                // remove piece + update health
                 if (piece == 1 || piece == 3)
-                {
-                    this->blackHealth--;
-                }
+                    blackHealth--;
                 else
-                {
-                    this->redHealth--;
-                }
+                    redHealth--;
 
-                this->grid[midRow][midCol] = 0;
+                grid[midRow][midCol] = 0;
+
+                // 🔊 PLAY SOUND ON ATTACK
+                attackSound.play();
+
+                didCapture = true;
 
                 if (isKing)
-                {
                     validMove = true;
-                }
                 else
                 {
-                    if (piece == 1 && dr == -2)
-                    {
-                        validMove = true;
-                    }
-                    if (piece == 2 && dr == 2)
-                    {
-                        validMove = true;
-                    }
+                    if (piece == 1 && dr == -2) validMove = true;
+                    if (piece == 2 && dr == 2) validMove = true;
                 }
             }
         }
 
         if (validMove)
         {
-
-            bool didCapture = false;
-            if (abs(dr) == 2) {
-                didCapture = true;
-            }
-            this->grid[row][col] = piece;
-            this->grid[this->selectedRow][this->selectedCol] = 0;
+            grid[row][col] = piece;
+            grid[selectedRow][selectedCol] = 0;
 
             // Promote to king
             if (piece == 1 && row == 0)
-            {
-                this->grid[row][col] = 3;
-            }
+                grid[row][col] = 3;
 
             if (piece == 2 && row == 7)
+                grid[row][col] = 4;
+
+            if (didCapture && canCaptureAgain(row, col))
             {
-                this->grid[row][col] = 4;
+                selectedRow = row;
+                selectedCol = col;
+                hasSelection = true;
             }
-
-            if (didCapture == true && canCaptureAgain(row, col) == true) {
-                this->selectedRow = row;
-                this->selectedCol = col;
-                this->hasSelection = true;
+            else
+            {
+                redTurn = !redTurn;
+                hasSelection = false;
             }
-            else {
-                this->redTurn = !this->redTurn;
-                this->hasSelection = false;
-            }
-
-
         }
     }
 
-    this->hasSelection = false;
+    hasSelection = false;
 }
 
 void Board::create(sf::RenderWindow& window)
@@ -207,17 +192,12 @@ void Board::create(sf::RenderWindow& window)
         for (int c = 0; c < 8; c++)
         {
             sf::RectangleShape square(sf::Vector2f((float)size, (float)size));
-
             square.setPosition(sf::Vector2f((float)(c * size), (float)(r * size)));
 
             if ((r + c) % 2 == 0)
-            {
                 square.setFillColor(sf::Color::White);
-            }
             else
-            {
                 square.setFillColor(sf::Color(100, 100, 100));
-            }
 
             window.draw(square);
 
@@ -225,22 +205,10 @@ void Board::create(sf::RenderWindow& window)
             {
                 Piece* p = nullptr;
 
-                if (grid[r][c] == 1)
-                {
-                    p = new NormalPiece(true);
-                }
-                else if (grid[r][c] == 2)
-                {
-                    p = new NormalPiece(false);
-                }
-                else if (grid[r][c] == 3)
-                {
-                    p = new KingPiece(true);
-                }
-                else if (grid[r][c] == 4)
-                {
-                    p = new KingPiece(false);
-                }
+                if (grid[r][c] == 1) p = new NormalPiece(true);
+                else if (grid[r][c] == 2) p = new NormalPiece(false);
+                else if (grid[r][c] == 3) p = new KingPiece(true);
+                else if (grid[r][c] == 4) p = new KingPiece(false);
 
                 if (p)
                 {
@@ -279,13 +247,9 @@ void Board::drawWinner(sf::RenderWindow& window, const std::string& text)
     indicator.setPosition(sf::Vector2f(360.f, 360.f));
 
     if (text == "Red Wins!")
-    {
         indicator.setFillColor(sf::Color::Red);
-    }
     else
-    {
         indicator.setFillColor(sf::Color::Black);
-    }
 
     window.draw(indicator);
 }
