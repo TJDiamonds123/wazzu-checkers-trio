@@ -2,13 +2,13 @@
 
 
 
-This is a simple Checkers game built in c++ using "SFML" libraries. We tried to make it as close as we could to normal checkers, and added an AI to play against.
+This is a simple Checkers game built in C++ using "SFML" libraries. We tried to make it as close as we could to normal checkers.
 
 ## Rules
 
 * 8x8 normal checkers board
-* Player 1 against CPU
-* You can only move diaginally forward
+* Player 1 (RED) against Player 2 (BLACK)
+* You can only move diagonally forward
 * King promotion (pieces can move backwards after becoming king)
 * You must take all of the opponents pieces to win
 
