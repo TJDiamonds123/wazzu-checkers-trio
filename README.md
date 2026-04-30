@@ -1,41 +1,31 @@
-#include "Board.hpp"
+ # Checkers
 
 
 
-int main() {
+This is a simple Checkers game built in c++ using "SFML" libraries. We tried to make it as close as we could to normal checkers, and added an AI to play against.
+
+## Rules
+
+* 8x8 normal checkers board
+* Player 1 against CPU
+* You can only move diaginally forward
+* King promotion (pieces can move backwards after becoming king)
+* You must take all of the opponents pieces to win
+
+## Controls
+
+* Click a piece to select it, then click a valid tile to move
+
+## Setup Instructions
+
+1. Install **SFML 3.1.0**
+2. Configure SFML in Visual Studio
+3. Build and run the project
 
 
-	sf::RenderWindow window(sf::VideoMode(sf::Vector2u(800, 800)), "Checkers Board");
+## Authors
 
-	int size = 100;
-
-
-	Board board(size);
-
-
-	while (window.isOpen()) {
-
-		sf::Event event;
-
-		while (window.pollEvent(event)) {
-
-
-			if (event.type == sf::Event::Closed) {
-				window.closed();
-			}
-
-		}
-
-
-		window.clear();
-		board.draw(window);
-		window.display();
-
-
-
-
-	}
-
-
-	return 0;
-}
+Created by:
+			Noah
+			Kasen
+			Timothy
