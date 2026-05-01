@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 #include "NormalPiece.hpp"
 #include "KingPiece.hpp"
@@ -17,6 +18,10 @@ private:
     bool hasSelection;
     int selectedRow;
     int selectedCol;
+
+    // Sound for attack
+    sf::SoundBuffer attackBuffer;
+    sf::Sound attackSound;
 
 public:
     Board(int s);
