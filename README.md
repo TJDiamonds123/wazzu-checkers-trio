@@ -27,6 +27,10 @@ We tried to make it as close as we could to normal checkers.
 
 * Polymorphism is used from a derived Piece.hpp class into KingPiece.hpp and NormalPiece.hpp separately.
 
+## Video
+
+* This is a link to the video showing the program running: 
+
 ## Authors
 
 Created by:
