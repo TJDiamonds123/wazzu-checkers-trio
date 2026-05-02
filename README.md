@@ -1,16 +1,16 @@
  # Checkers
 
-
-
-This is a simple Checkers game built in C++ using "SFML" libraries. We tried to make it as close as we could to normal checkers.
+This is a simple Checkers game built in C++ using "SFML" libraries, particularly the graphics and audio libraries. 
+We tried to make it as close as we could to normal checkers.
 
 ## Rules
 
-* 8x8 normal checkers board
+* 8x8 checkers board
 * Player 1 (RED) against Player 2 (BLACK)
-* You can only move diagonally forward
-* King promotion (pieces can move backwards after becoming king)
-* You must take all of the opponents pieces to win
+* Player 1 (RED) goes first, Player 2 (BLACK) goes after Player 1 (RED)
+* You can only move diagonally forward, jumping over any opposing color pieces to capture them (eliminate them)
+* King promotion happens on the opposite end of the board from your starting side (pieces can move backwards after becoming king)
+* You must take all of the opponents pieces to win the game
 
 ## Controls
 
@@ -19,8 +19,9 @@ This is a simple Checkers game built in C++ using "SFML" libraries. We tried to 
 ## Setup Instructions
 
 1. Install **SFML 3.1.0**
-2. Configure SFML in Visual Studio
-3. Build and run the project
+2. Configure SFML in Visual Studio to include the Graphics and Audio libraries
+(This tutorial helps with configuring SFML: https://www.sfml-dev.org/tutorials/3.0/getting-started/visual-studio/#creating-and-configuring-an-sfml-project )
+4. Build and run the project
 
 ## Polymorphism
 
