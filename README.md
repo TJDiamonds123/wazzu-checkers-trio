@@ -3,6 +3,14 @@
 This is a simple Checkers game built in C++ using "SFML" libraries, particularly the graphics and audio libraries. 
 We tried to make it as close as we could to normal checkers.
 
+## Authors
+
+Created by:
+
+* Noah Hunt - Lab Section 1
+* Kasen Koide - Lab Section 3
+* Timothy Mullin - Lab Section 10
+
 ## Rules
 
 * 8x8 checkers board
@@ -31,10 +39,4 @@ We tried to make it as close as we could to normal checkers.
 
 * This is a link to the video showing the program running: 
 
-## Authors
 
-Created by:
-
-* Noah Hunt - Lab Section 1
-* Kasen Koide - Lab Section 3
-* Timothy Mullin - Lab Section 10
