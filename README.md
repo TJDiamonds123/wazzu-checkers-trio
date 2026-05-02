@@ -35,5 +35,5 @@ We tried to make it as close as we could to normal checkers.
 
 Created by:
 			Noah
-			Kasen
+			Kasen Koide Lab section 3
 			Timothy
