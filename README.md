@@ -25,7 +25,7 @@ We tried to make it as close as we could to normal checkers.
 
 ## Polymorphism
 
-* Polymorphism is used from a derived Piece.hpp class into KingPiece.hpp and NormalPiece.hpp separately. This polymorphism is for each piece and they behave differently based on the class its it. Whether its a normal piece or a king piece
+* Polymorphism is used from a derived Piece.hpp class into KingPiece.hpp and NormalPiece.hpp separately. This polymorphism is for each piece and they behave differently based on the class it is. Whether its a normal piece or a king piece. The program treats all the pieces the same but draw them differently based on the case.
 
 ## Video
 
