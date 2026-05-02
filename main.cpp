@@ -16,16 +16,41 @@ int main()
     bool menu = true;
     std::string winner = "";
 
+    sf::Music music; // Background music
+
+    sf::Music fanfare; // Victory music
+    bool musicFlag = true; // Checks if victory music has already been played
+
+
+    if (!fanfare.openFromFile("AwesomeSoundEffect.wav"))
+    {
+        std::cout << "Failed to load fanfare" << std::endl;
+    }
+
+
 
     //Validates code
     if (!validate.runAllTests())
     {
         std::cout << "Error: Test cases not working";
+        return -1;
+    }
+ 
+
+    // Loads music
+    if (music.openFromFile("music.wav"))
+    {
+        music.play();
     }
     else
     {
-        std::cout << "[Complete]: Application running...";
+        std::cout << "Failed to load music" << std::endl;
+        return -1;
     }
+
+
+    // Application passes checks
+    std::cout << "[Complete]: Application running...";
 
 
     // Runs main application
@@ -69,9 +94,21 @@ int main()
         if (!menu)
         {
             if (board.getBlack() == 0)
+            {
                 winner = "Red Wins!";
+            }
             else if (board.getRed() == 0)
+            {
                 winner = "Black Wins!";
+            }
+        }
+
+
+        // Checks for fanfare flag
+        if ((board.getBlack() == 0 || board.getRed() == 0) && musicFlag)
+        {
+            fanfare.play();
+            musicFlag = false;
         }
 
         window.clear();
