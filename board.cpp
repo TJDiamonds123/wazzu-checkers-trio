@@ -23,7 +23,7 @@ Board::Board(int s) : attackSound(attackBuffer) // Used ChatGPT to help configur
     attackSound.setBuffer(attackBuffer);
 }
 
-void Board::init()
+void Board::init() //Initialize the starting board
 {
     for (int r = 0; r < 8; r++)
     {
@@ -34,15 +34,15 @@ void Board::init()
             if ((r + c) % 2 == 1)
             {
                 if (r < 3)
-                    grid[r][c] = 2;
+                    grid[r][c] = 2;//puts the black on top and red pieces on the bottom
                 else if (r > 4)
                     grid[r][c] = 1;
             }
         }
     }
 }
-
-bool Board::canCaptureAgain(int r, int c)
+//using the code we had i asked chatgpt how will i make a piece double jump
+bool Board::canCaptureAgain(int r, int c)//Check if a piece can do another jump after they capture. 
 {
     // up left
     if (r - 2 >= 0 && c - 2 >= 0)
@@ -183,7 +183,7 @@ if (!hasSelection)// I had trouble with the king moving out of turn. i asked cha
     hasSelection = false;
 }
 
-void Board::create(sf::RenderWindow& window)
+void Board::create(sf::RenderWindow& window)//draws the board and pieces
 {
     for (int r = 0; r < 8; r++)
     {
@@ -217,7 +217,7 @@ void Board::create(sf::RenderWindow& window)
         }
     }
 }
-
+//returns the remaining pieces black or red
 int Board::getBlack() const
 {
     return blackHealth;
@@ -228,7 +228,7 @@ int Board::getRed() const
     return redHealth;
 }
 
-void Board::drawWinner(sf::RenderWindow& window, const std::string& text)
+void Board::drawWinner(sf::RenderWindow& window, const std::string& text)//draws the winner screen
 {
     sf::RectangleShape overlay(sf::Vector2f(800.f, 800.f));
     overlay.setFillColor(sf::Color(0, 0, 0, 180));
