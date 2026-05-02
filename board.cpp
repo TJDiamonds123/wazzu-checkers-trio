@@ -85,22 +85,20 @@ bool Board::canCaptureAgain(int r, int c)
 
 void Board::whenClick(int row, int col)
 {
-    if (!hasSelection)
+if (!hasSelection)// I had trouble with the king moving out of turn. i asked chatgpt what is wrong and what is out of place so i cna fix it
+{
+    if (grid[row][col] != 0)
     {
-        if (grid[row][col] != 0)
+        if ((redTurn && (grid[row][col] == 1 || grid[row][col] == 3)) ||
+            (!redTurn && (grid[row][col] == 2 || grid[row][col] == 4)))
         {
-            if ((redTurn && grid[row][col] == 1) ||
-                (!redTurn && grid[row][col] == 2) ||
-                grid[row][col] == 3 ||
-                grid[row][col] == 4)
-            {
-                selectedRow = row;
-                selectedCol = col;
-                hasSelection = true;
-            }
+            selectedRow = row;
+            selectedCol = col;
+            hasSelection = true;
         }
-        return;
     }
+    return;
+}
 
     int dr = row - selectedRow;
     int dc = col - selectedCol;
