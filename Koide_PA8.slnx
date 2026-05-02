@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Koide_PA8/Koide_PA8.vcxproj" Id="20ec757c-be63-453b-9dce-3be7ba98030a" />
+</Solution>
