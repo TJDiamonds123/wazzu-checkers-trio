@@ -6,11 +6,11 @@
 class Test
 {
 public:
-    bool runAllTests();
+    bool runAllTests();//runs all the test functions and returns if they passes or not
 
 private:
-    bool passedFailed(bool condition, const std::string& testName);
-
+    bool passedFailed(bool condition, const std::string& testName);//prints whether the test passes or failed
+//individual test cases
     bool testInitialBoardSetup();
     bool testValidMove();
     bool testInvalidMove();
