@@ -34,6 +34,6 @@ We tried to make it as close as we could to normal checkers.
 ## Authors
 
 Created by:
-			Noah
+			Noah Hunt Lab section 1
 			Kasen Koide Lab section 3
 			Timothy
