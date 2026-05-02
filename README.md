@@ -37,6 +37,6 @@ Created by:
 
 ## Video
 
-* This is a link to the video showing the program running: 
+* This is a link to the video showing the program running: https://youtu.be/LXknU-ENU_U
 
 
